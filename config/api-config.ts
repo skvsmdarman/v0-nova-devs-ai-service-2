@@ -37,6 +37,7 @@ export const MODELS_CONFIG = {
     { id: "mistralai/codestral-22b-instruct-v0.1", name: "Codestral 22B", context: "32K", provider: "Mistral AI" },
     { id: "google/codegemma-7b", name: "CodeGemma 7B", context: "8K", provider: "Google" },
     { id: "qwen/qwen2.5-coder-32b-instruct", name: "Qwen 2.5 Coder 32B", context: "32K", provider: "Qwen" },
+    { id: "qwen/qwen3-235b-a22b", name: "Qwen 3.0 Coder 235B", context: "58K", provider: "Qwen" },
   ],
 
   thinking: [
