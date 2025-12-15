@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { callOpenRouter, MODELS } from "@/lib/openrouter"
+import { callNvidiaChat } from "@/lib/nvidia"
+import { MODELS_CONFIG } from "@/config/api-config"
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,9 +15,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Image URL is required for vision models" }, { status: 400 })
     }
 
-    const validModel = model || MODELS.vision[0].id
+    const validModel = model || MODELS_CONFIG.vision[0].id
 
-    const response = await callOpenRouter({
+    // NVIDIA Vision models expect the image in the content array
+    const response = await callNvidiaChat({
       model: validModel,
       messages: [
         {
@@ -33,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    console.error("[v0] Vision API error:", error)
+    console.error("Vision API error:", error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Internal server error" },
       { status: 500 },

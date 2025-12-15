@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { callOpenRouter, MODELS } from "@/lib/openrouter"
+import { callNvidiaChat } from "@/lib/nvidia"
+import { MODELS_CONFIG } from "@/config/api-config"
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,9 +12,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate model exists in our chat models
-    const validModel = model || MODELS.chat[0].id
+    const validModel = model || MODELS_CONFIG.chat[0].id
 
-    const response = await callOpenRouter({
+    const response = await callNvidiaChat({
       model: validModel,
       messages,
       temperature,
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(response)
   } catch (error) {
-    console.error("[v0] Chat API error:", error)
+    console.error("Chat API error:", error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Internal server error" },
       { status: 500 },
