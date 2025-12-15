@@ -22,7 +22,6 @@ export const MODELS_CONFIG = {
   chat: [
     { id: "abacusai/dracarys-llama-3.1-70b-instruct", name: "Dracarys Llama 3.1 70B", context: "128K", provider: "abacusai" },
     { id: "ai21labs/jamba-1.5-mini-instruct", name: "Jamba 1.5 Mini", context: "128K", provider: "ai21labs" },
-    { id: "aisingapore/sea-lion-7b-instruct", name: "Sea Lion 7B", context: "128K", provider: "aisingapore" },
     { id: "baichuan-inc/baichuan2-13b-chat", name: "Baichuan2 13B", context: "128K", provider: "baichuan-inc" },
     { id: "bytedance/seed-oss-36b-instruct", name: "Seed OSS 36B", context: "128K", provider: "bytedance" },
     { id: "deepseek-ai/deepseek-v3.1", name: "DeepSeek V3.1", context: "128K", provider: "deepseek-ai" },
@@ -110,10 +109,6 @@ export const MODELS_CONFIG = {
   ],
 
   coding: [
-    { id: "bigcode/starcoder2-7b", name: "StarCoder2 7B", context: "128K", provider: "bigcode" },
-    { id: "google/codegemma-1.1-7b", name: "CodeGemma 1.1 7B", context: "128K", provider: "google" },
-    { id: "google/codegemma-7b", name: "CodeGemma 7B", context: "128K", provider: "google" },
-    { id: "meta/codellama-70b", name: "CodeLlama 70B", context: "128K", provider: "meta" },
     { id: "mistralai/codestral-22b-instruct-v0.1", name: "Codestral 22B", context: "128K", provider: "mistralai" },
     { id: "mistralai/mamba-codestral-7b-v0.1", name: "Mamba Codestral 7B", context: "128K", provider: "mistralai" },
     { id: "qwen/qwen2.5-coder-7b-instruct", name: "Qwen 2.5 Coder 7B", context: "128K", provider: "qwen" },
@@ -134,7 +129,6 @@ export const MODELS_CONFIG = {
   ],
 
   vision: [
-    { id: "google/paligemma", name: "PaliGemma", context: "128K", provider: "google" },
     { id: "meta/llama-3.2-11b-vision-instruct", name: "Llama 3.2 11B Vision", context: "128K", provider: "meta" },
     { id: "meta/llama-3.2-90b-vision-instruct", name: "Llama 3.2 90B Vision", context: "128K", provider: "meta" },
     { id: "microsoft/phi-3.5-vision-instruct", name: "Phi-3.5 Vision", context: "128K", provider: "microsoft" },
