@@ -54,7 +54,7 @@ export const MODELS_CONFIG = {
   ],
 
   image: [
-    { id: "stabilityai/stable-diffusion-3-medium", name: "Stable Diffusion 3 Medium", context: "N/A", provider: "Stability AI" },
+    { id: "stabilityai/stable-diffusion-xl", name: "Stable Diffusion 3 Medium", context: "N/A", provider: "Stability AI" },
     { id: "black-forest-labs/flux.1-dev", name: "Flux.1 Dev", context: "N/A", provider: "Black Forest Labs" },
   ],
 
