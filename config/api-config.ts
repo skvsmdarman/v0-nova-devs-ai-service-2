@@ -103,9 +103,7 @@ export const MODELS_CONFIG = {
     { id: "tiiuae/falcon3-7b-instruct", name: "Falcon 3 7B", context: "128K", provider: "tiiuae" },
     { id: "upstage/solar-10.7b-instruct", name: "Solar 10.7B", context: "128K", provider: "upstage" },
     { id: "utter-project/eurollm-9b-instruct", name: "EuroLLM 9B", context: "128K", provider: "utter-project" },
-    { id: "yentinglin/llama-3-taiwan-70b-instruct", name: "Llama 3 Taiwan 70B", context: "128K", provider: "yentinglin" },
-    { id: "baai/bge-m3", name: "BGE M3", context: "128K", provider: "baai" },
-    { id: "nvidia/nvclip", name: "NVCLIP", context: "128K", provider: "nvidia" },
+    { id: "yentinglin/llama-3-taiwan-70b-instruct", name: "Llama 3 Taiwan 70B", context: "128K", provider: "yentinglin" }
   ],
 
   coding: [
@@ -137,16 +135,11 @@ export const MODELS_CONFIG = {
   ],
 
   image: [
-    { id: "igenius/colosseum_355b_instruct_16k", name: "Colosseum 355B (Image Capable)", context: "128K", provider: "igenius" },
-    { id: "igenius/italia_10b_instruct_16k", name: "Italia 10B (Image Capable)", context: "128K", provider: "igenius" },
-    { id: "stabilityai/stable-diffusion-xl", name: "Stable Diffusion XL", context: "N/A", provider: "stabilityai" }, // Keeping existing
-    { id: "black-forest-labs/flux.1-dev", name: "Flux.1 Dev", context: "N/A", provider: "black-forest-labs" }, // Keeping existing
+
   ],
 
   speech: [
-    { id: "nvidia/parakeet-ctc-1.1b-asr", name: "Parakeet ASR", context: "N/A", provider: "nvidia" },
-    // Adding placeholder/known TTS models since verification failed for them specifically
-    { id: "nvidia/fastpitch-hifigan-tts", name: "FastPitch HiFi-GAN TTS", context: "N/A", provider: "nvidia" },
+
   ],
 
   search: [
