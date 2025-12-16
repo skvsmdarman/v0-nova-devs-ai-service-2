@@ -380,8 +380,8 @@ export default function PlaygroundPage() {
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-4xl font-bold text-foreground">AI Playground (NVIDIA NIM)</h1>
-          <p className="mt-2 text-lg text-muted-foreground">Test all Nova Devs AI models interactively with NVIDIA Acceleration</p>
+          <h1 className="text-4xl font-bold text-foreground">AI Playground</h1>
+          <p className="mt-2 text-lg text-muted-foreground">Test all Nova Devs AI models interactively with Nvidia Powered GPU</p>
         </div>
       </div>
 
