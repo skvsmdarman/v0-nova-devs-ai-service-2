@@ -107,6 +107,7 @@ export const MODELS_CONFIG = {
   ],
 
   coding: [
+    { id: "moonshotai/kimi-k2-thinking", name: "Kimi 2.5 thinking", context: "128K", provider: "kimi" },
     { id: "mistralai/codestral-22b-instruct-v0.1", name: "Codestral 22B", context: "128K", provider: "mistralai" },
     { id: "mistralai/mamba-codestral-7b-v0.1", name: "Mamba Codestral 7B", context: "128K", provider: "mistralai" },
     { id: "qwen/qwen2.5-coder-7b-instruct", name: "Qwen 2.5 Coder 7B", context: "128K", provider: "qwen" },
