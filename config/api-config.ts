@@ -20,6 +20,7 @@ export const API_CONFIG = {
 // Model configuration - Add or remove models here
 export const MODELS_CONFIG = {
   chat: [
+    { id: "nvidia/nemotron-mini-4b-instruct", name: "Mini 4b Instruct Role play model", context: "128K", provider: "Nvidia" },
     { id: "abacusai/dracarys-llama-3.1-70b-instruct", name: "Dracarys Llama 3.1 70B", context: "128K", provider: "abacusai" },
     { id: "ai21labs/jamba-1.5-mini-instruct", name: "Jamba 1.5 Mini", context: "128K", provider: "ai21labs" },
     { id: "baichuan-inc/baichuan2-13b-chat", name: "Baichuan2 13B", context: "128K", provider: "baichuan-inc" },
