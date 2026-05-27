@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { callOpenRouter, MODELS } from "@/lib/openrouter"
+import { callNvidiaChat } from "@/lib/nvidia"
+import { MODELS_CONFIG } from "@/config/api-config"
 import { storeHTML } from "@/lib/storage"
 
 export async function POST(request: NextRequest) {
@@ -22,9 +23,9 @@ Requirements:
 
 The HTML should be a complete, valid document starting with <!DOCTYPE html>.`
 
-    const validModel = model || MODELS.coding[0].id
+    const validModel = model || MODELS_CONFIG.coding[0].id
 
-    const response = await callOpenRouter({
+    const response = await callNvidiaChat({
       model: validModel,
       messages: [
         { role: "system", content: systemMessage },

@@ -1,32 +1,36 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { callOpenRouter, MODELS } from "@/lib/openrouter"
+import { callNvidiaChat } from "@/lib/nvidia"
+import { MODELS_CONFIG } from "@/config/api-config"
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { prompt, model, language = "html", temperature = 0.3, max_tokens = 4000 } = body
+    const { messages, model, temperature = 0.7, max_tokens = 4000 } = body
 
-    if (!prompt) {
-      return NextResponse.json({ error: "Prompt is required" }, { status: 400 })
+    if (!messages || !Array.isArray(messages)) {
+      return NextResponse.json({ error: "Messages array is required" }, { status: 400 })
     }
 
-    const systemMessage = `You are an expert programmer. Generate clean, well-structured ${language.toUpperCase()} code based on the user's request. Only output the code without explanations unless asked.`
+    const validModel = model || MODELS_CONFIG.coding[0].id
 
-    const validModel = model || MODELS.coding[0].id
+    // Append a system prompt to encourage coding behavior if not present
+    const systemPrompt = {
+      role: "system",
+      content: "You are an expert software engineer. Provide clear, concise, and efficient code solutions. Explain your reasoning briefly before providing the code."
+    }
 
-    const response = await callOpenRouter({
+    const messagesWithSystem = [systemPrompt, ...messages]
+
+    const response = await callNvidiaChat({
       model: validModel,
-      messages: [
-        { role: "system", content: systemMessage },
-        { role: "user", content: prompt },
-      ],
+      messages: messagesWithSystem, // Use the enhanced message list
       temperature,
       max_tokens,
     })
 
     return NextResponse.json(response)
   } catch (error) {
-    console.error("[v0] Coding API error:", error)
+    console.error("Coding API error:", error)
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Internal server error" },
       { status: 500 },
