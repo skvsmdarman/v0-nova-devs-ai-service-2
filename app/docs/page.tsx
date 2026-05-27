@@ -21,9 +21,6 @@ export default function DocsPage() {
               <a href="#overview" className="block text-sm text-muted-foreground hover:text-foreground">
                 Overview
               </a>
-              <a href="#authentication" className="block text-sm text-muted-foreground hover:text-foreground">
-                Authentication
-              </a>
               <a href="#endpoints" className="block text-sm text-muted-foreground hover:text-foreground">
                 Endpoints
               </a>
@@ -42,11 +39,14 @@ export default function DocsPage() {
               <a href="#search" className="block pl-4 text-sm text-muted-foreground hover:text-foreground">
                 Search API
               </a>
+              <a href="#speech" className="block pl-4 text-sm text-muted-foreground hover:text-foreground">
+                Speech API
+              </a>
+              <a href="#retrieval" className="block pl-4 text-sm text-muted-foreground hover:text-foreground">
+                Retrieval API
+              </a>
               <a href="#models" className="block text-sm text-muted-foreground hover:text-foreground">
                 Available Models
-              </a>
-              <a href="#errors" className="block text-sm text-muted-foreground hover:text-foreground">
-                Error Handling
               </a>
             </div>
           </nav>
@@ -65,32 +65,15 @@ export default function DocsPage() {
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">Base URL</h4>
                     <code className="block bg-muted p-3 rounded-md text-sm">{API_CONFIG.BASE_URL}/api</code>
-                    <p className="text-xs text-muted-foreground mt-2">
-                      Update the base URL in <code className="text-xs">config/api-config.ts</code>
-                    </p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-2">Features</h4>
                     <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                      <li>{Object.values(MODELS_CONFIG).flat().length}+ free AI models across 6 categories</li>
-                      
-                      <li>Support for text, code, vision, reasoning, and uncensored tasks</li>
-                      <li>HTML code generation with temporary preview hosting</li>
-                      <li>Easy model configuration management</li>
+                      <li>Huge library of models including Chat, Coding, Vision, Speech, and Retrieval</li>
+                      <li>Unified API interface</li>
+                      <li>Integrated playgrounds for testing</li>
                     </ul>
                   </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            <section id="authentication">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Authentication</CardTitle>
-                  <CardDescription>Currently, all endpoints are publicly accessible</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  
                 </CardContent>
               </Card>
             </section>
@@ -98,236 +81,68 @@ export default function DocsPage() {
             <section id="endpoints">
               <h2 className="text-3xl font-bold text-foreground mb-6">API Endpoints</h2>
 
-              <div id="chat" className="space-y-6">
-                <Card>
+              <div className="space-y-6">
+                {/* Chat API */}
+                <Card id="chat">
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle>Chat API</CardTitle>
                       <Badge>POST /api/chat</Badge>
                     </div>
-                    <CardDescription>General conversational AI for chat applications</CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Request Body</h4>
-                      <Tabs defaultValue="json">
-                        <TabsList>
-                          <TabsTrigger value="json">JSON</TabsTrigger>
-                          <TabsTrigger value="curl">cURL</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="json">
-                          <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                            {`{
-  "messages": [
-    {
-      "role": "user",
-      "content": "Hello, how are you?"
-    }
-  ],
-  "model": "meta-llama/llama-3.3-70b-instruct:free",
-  "temperature": 0.7,
-  "max_tokens": 2000
-}`}
-                          </pre>
-                        </TabsContent>
-                        <TabsContent value="curl">
-                          <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                            {`curl -X POST https://your-domain.vercel.app/api/chat \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "messages": [{"role": "user", "content": "Hello!"}],
-    "model": "meta-llama/llama-3.3-70b-instruct:free"
-  }'`}
-                          </pre>
-                        </TabsContent>
-                      </Tabs>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Parameters</h4>
-                      <div className="space-y-2">
-                        <div className="grid grid-cols-4 gap-2 text-sm">
-                          <span className="font-medium text-foreground">Parameter</span>
-                          <span className="font-medium text-foreground">Type</span>
-                          <span className="font-medium text-foreground">Required</span>
-                          <span className="font-medium text-foreground">Description</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>messages</code>
-                          <span>array</span>
-                          <Badge variant="destructive" className="w-fit">
-                            Yes
-                          </Badge>
-                          <span>Array of message objects</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>model</code>
-                          <span>string</span>
-                          <Badge variant="secondary" className="w-fit">
-                            No
-                          </Badge>
-                          <span>Model ID (defaults to Llama 3.3 70B)</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>temperature</code>
-                          <span>number</span>
-                          <Badge variant="secondary" className="w-fit">
-                            No
-                          </Badge>
-                          <span>0-1, controls randomness</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>max_tokens</code>
-                          <span>number</span>
-                          <Badge variant="secondary" className="w-fit">
-                            No
-                          </Badge>
-                          <span>Maximum response length</span>
-                        </div>
-                      </div>
-                    </div>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">Compatible with OpenAI Chat Completions.</p>
+                    <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
+                      {`{ "messages": [{"role": "user", "content": "Hello"}], "model": "meta/llama-3.1-70b-instruct" }`}
+                    </pre>
                   </CardContent>
                 </Card>
 
-                <Card id="coding">
+                {/* Speech API */}
+                <Card id="speech">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle>Coding API</CardTitle>
-                      <Badge>POST /api/coding</Badge>
+                      <CardTitle>Speech API</CardTitle>
+                      <Badge>POST /api/speech</Badge>
                     </div>
-                    <CardDescription>Generate code for websites and applications</CardDescription>
+                    <CardDescription>Text-to-Speech generation</CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Request Body</h4>
-                      <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                        {`{
-  "prompt": "Create a responsive landing page",
-  "language": "html",
-  "model": "meta-llama/llama-3.3-70b-instruct:free",
-  "temperature": 0.3,
-  "max_tokens": 4000
-}`}
-                      </pre>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Parameters</h4>
-                      <div className="space-y-2">
-                        <div className="grid grid-cols-4 gap-2 text-sm">
-                          <span className="font-medium text-foreground">Parameter</span>
-                          <span className="font-medium text-foreground">Type</span>
-                          <span className="font-medium text-foreground">Required</span>
-                          <span className="font-medium text-foreground">Description</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>prompt</code>
-                          <span>string</span>
-                          <Badge variant="destructive" className="w-fit">
-                            Yes
-                          </Badge>
-                          <span>Code generation prompt</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>language</code>
-                          <span>string</span>
-                          <Badge variant="secondary" className="w-fit">
-                            No
-                          </Badge>
-                          <span>Target language (html, css, js, etc.)</span>
-                        </div>
-                      </div>
-                    </div>
+                  <CardContent>
+                    <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
+                      {`{ "text": "Hello world", "model": "nvidia/fastpitch-hifigan-tts" }`}
+                    </pre>
+                    <p className="mt-2 text-sm text-muted-foreground">Returns a JSON object with base64 encoded audio.</p>
                   </CardContent>
                 </Card>
 
-                <Card id="thinking">
+                 {/* Retrieval API */}
+                 <Card id="retrieval">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle>Thinking API</CardTitle>
-                      <Badge>POST /api/thinking</Badge>
+                      <CardTitle>Retrieval API</CardTitle>
+                      <Badge>POST /api/retrieval</Badge>
                     </div>
-                    <CardDescription>Advanced reasoning and problem-solving</CardDescription>
+                    <CardDescription>Generate embeddings for text</CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Request Body</h4>
-                      <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                        {`{
-  "prompt": "Explain quantum computing step by step",
-  "model": "nousresearch/hermes-3-llama-3.1-405b:free",
-  "temperature": 0.8,
-  "max_tokens": 3000
-}`}
-                      </pre>
-                    </div>
+                  <CardContent>
+                    <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
+                      {`{ "query": "Search query or document text", "model": "nvidia/embed-qa-4", "input_type": "query" }`}
+                    </pre>
                   </CardContent>
                 </Card>
 
-                <Card id="vision">
+                 {/* Vision API */}
+                 <Card id="vision">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle>Vision API</CardTitle>
+                      <CardTitle>Vision / Classification API</CardTitle>
                       <Badge>POST /api/vision</Badge>
                     </div>
-                    <CardDescription>Analyze images, documents, and videos</CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Request Body</h4>
-                      <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                        {`{
-  "prompt": "Describe this image in detail",
-  "image_url": "https://example.com/image.jpg",
-  "model": "nvidia/nemotron-nano-12b-2-vl:free",
-  "temperature": 0.7,
-  "max_tokens": 2000
-}`}
-                      </pre>
-                    </div>
-
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Parameters</h4>
-                      <div className="space-y-2">
-                        <div className="grid grid-cols-4 gap-2 text-sm">
-                          <span className="font-medium text-foreground">Parameter</span>
-                          <span className="font-medium text-foreground">Type</span>
-                          <span className="font-medium text-foreground">Required</span>
-                          <span className="font-medium text-foreground">Description</span>
-                        </div>
-                        <div className="grid grid-cols-4 gap-2 text-sm text-muted-foreground">
-                          <code>image_url</code>
-                          <span>string</span>
-                          <Badge variant="destructive" className="w-fit">
-                            Yes
-                          </Badge>
-                          <span>URL of the image to analyze</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card id="search">
-                  <CardHeader>
-                    <div className="flex items-center justify-between">
-                      <CardTitle>Search API</CardTitle>
-                      <Badge>POST /api/search</Badge>
-                    </div>
-                    <CardDescription>Web search and information retrieval</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2">Request Body</h4>
-                      <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
-                        {`{
-  "query": "Latest AI developments in 2025",
-  "model": "google/gemini-flash-2.0-exp:free",
-  "temperature": 0.5,
-  "max_tokens": 3000
-}`}
-                      </pre>
-                    </div>
+                  <CardContent>
+                    <pre className="bg-muted p-4 rounded-md text-sm overflow-x-auto">
+                      {`{ "prompt": "Describe image", "image_url": "https://...", "model": "google/paligemma" }`}
+                    </pre>
                   </CardContent>
                 </Card>
               </div>
@@ -338,83 +153,38 @@ export default function DocsPage() {
                 <CardHeader>
                   <CardTitle>Available Models</CardTitle>
                   <CardDescription>
-                    All {Object.values(MODELS_CONFIG).flat().length} models are free with automatic rate limiting.
-                    Configure models in config/api-config.ts
+                    Browse available models by category.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Tabs defaultValue="chat">
-                    <TabsList className="grid w-full grid-cols-6">
+                    <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 h-auto">
                       <TabsTrigger value="chat">Chat</TabsTrigger>
                       <TabsTrigger value="coding">Coding</TabsTrigger>
-                      <TabsTrigger value="thinking">Thinking</TabsTrigger>
+                      <TabsTrigger value="thinking">Think</TabsTrigger>
                       <TabsTrigger value="vision">Vision</TabsTrigger>
-                      <TabsTrigger value="search">Search</TabsTrigger>
-                      <TabsTrigger value="uncensored">Uncensored</TabsTrigger>
+                      <TabsTrigger value="image">Image</TabsTrigger>
+                      <TabsTrigger value="speech">Speech</TabsTrigger>
+                      <TabsTrigger value="retrieval">Retriev</TabsTrigger>
+                      <TabsTrigger value="clf">Classify</TabsTrigger>
                     </TabsList>
 
                     {Object.entries(MODELS_CONFIG).map(([category, models]) => (
-                      <TabsContent key={category} value={category} className="space-y-2 mt-4">
+                      <TabsContent key={category} value={category === "image-classification" ? "clf" : category} className="space-y-2 mt-4">
                         <div className="space-y-2">
                           {models.map((model) => (
                             <div key={model.id} className="flex justify-between items-center p-3 bg-muted rounded">
-                              <div>
-                                <span className="font-medium text-foreground block">{model.name}</span>
-                                <span className="text-xs text-muted-foreground">{model.provider}</span>
+                              <div className="overflow-hidden">
+                                <span className="font-medium text-foreground block truncate">{model.name}</span>
+                                <span className="text-xs text-muted-foreground">{model.id}</span>
                               </div>
-                              <Badge variant="secondary">{model.context}</Badge>
+                              <Badge variant="secondary" className="shrink-0">{model.context}</Badge>
                             </div>
                           ))}
                         </div>
                       </TabsContent>
                     ))}
                   </Tabs>
-                </CardContent>
-              </Card>
-            </section>
-
-            <section id="errors">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Error Handling</CardTitle>
-                  <CardDescription>Understanding API error responses</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Error Response Format</h4>
-                    <pre className="bg-muted p-4 rounded-md text-sm">
-                      {`{
-  "error": "Error message description"
-}`}
-                    </pre>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-2">Common Error Codes</h4>
-                    <div className="space-y-2">
-                      <div className="flex gap-4 p-2 bg-muted rounded">
-                        <Badge variant="destructive">400</Badge>
-                        <span className="text-muted-foreground">Bad Request - Missing or invalid parameters</span>
-                      </div>
-                      <div className="flex gap-4 p-2 bg-muted rounded">
-                        <Badge variant="destructive">429</Badge>
-                        <span className="text-muted-foreground">
-                          Rate Limited - Automatic retry with exponential backoff
-                        </span>
-                      </div>
-                      <div className="flex gap-4 p-2 bg-muted rounded">
-                        <Badge variant="destructive">500</Badge>
-                        <span className="text-muted-foreground">Internal Server Error - Service unavailable</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 p-4 rounded-md">
-                    <p className="text-sm text-blue-900 dark:text-blue-100">
-                      <strong>Note:</strong> Rate limiting is handled automatically with exponential backoff. The API
-                      will retry failed requests up to 3 times with increasing delays (1s, 2s, 4s).
-                    </p>
-                  </div>
                 </CardContent>
               </Card>
             </section>
