@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Nova Devs AI Service - Free AI API for Developers",
   description:
-    "Access multiple AI models through a unified API. Chat, coding, reasoning, vision, and search capabilities powered by OpenRouter.",
+    "Access multiple AI models through a unified API. Chat, coding, reasoning, vision, and search capabilities powered by NVIDIA NIM.",
   generator: "v0.app",
   icons: {
     icon: [

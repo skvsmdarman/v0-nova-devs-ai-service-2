@@ -220,7 +220,7 @@ export default function HomePage() {
               </div>
               <span className="text-sm font-semibold text-foreground">Nova Devs AI Service</span>
             </div>
-            <p className="text-sm text-muted-foreground">Powered by OpenRouter • Free AI Models</p>
+            <p className="text-sm text-muted-foreground">Powered by NVIDIA NIM • Free AI Models</p>
           </div>
         </div>
       </footer>
